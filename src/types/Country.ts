@@ -1,6 +1,21 @@
 export interface CountryState {
     countries: Country[],
     currentCountry: string []
+    dayOneData: DayOneData[]
+}
+
+export class DayOneData{
+    country:string
+    date:number[]
+    confirmedCorona: number []
+
+    constructor(DayOneResponse: any){
+        this.country = DayOneResponse.Country
+        this.date = DayOneResponse.data
+        this.confirmedCorona = DayOneResponse.confirmedCorona
+    
+    }
+
 }
 
 export class Country {

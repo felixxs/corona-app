@@ -1,9 +1,10 @@
-import { CountryState } from "../types/Country";
-import { AppActions, GET_COUNTRIES, SET_CURRENT_COUNTRY, ADD_COUNTRY} from "../types/actions"
+import { CountryState, DayOneData } from "../types/Country";
+import { AppActions, GET_COUNTRIES, SET_CURRENT_COUNTRY, ADD_COUNTRY, GET_DAY_ONE_DATA_COUNTRY} from "../types/actions"
 
 const countryReducerDefaultState: CountryState = {
     countries:[],
-    currentCountry:[]
+    currentCountry:[],
+    dayOneData: []
 }
 
 const countryReducer = (state = countryReducerDefaultState, action: AppActions): CountryState => {
@@ -22,6 +23,11 @@ const countryReducer = (state = countryReducerDefaultState, action: AppActions):
             return {
                 ...state,
                 countries: [...state.countries, action.country]
+            }
+        case GET_DAY_ONE_DATA_COUNTRY:
+            return{
+                ...state,
+                dayOneData: [...state.dayOneData,action.dayOneData]
             }
         default:
             return state
