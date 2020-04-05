@@ -4,8 +4,9 @@ import {bindActionCreators} from 'redux'
 import { fetchCoronaData} from '../actions/countries'
 import { ThunkDispatch } from 'redux-thunk';
 import { AppActions } from '../types/actions';
-import { CountryState } from "../types/Country";
+import { CountryState} from "../types/Country";
 import {AppState} from '../store/configureStore'
+import SimpleSelect from './Dropdown'
 
 interface AppProps{
 
@@ -22,13 +23,15 @@ export class App extends React.Component<Props>{
 
   componentDidMount() {
   this.props.fetchCoronaData('https://api.covid19api.com/summary');
-  console.log(this.props.countries)
+  console.log(this.props.countries.countries)
   }
+
+  
 
   render(){
     return(
       <div>
-
+        <SimpleSelect></SimpleSelect>
       </div>
     )
     
