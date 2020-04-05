@@ -7,6 +7,7 @@ import { AppActions } from '../types/actions';
 import { CountryState} from "../types/Country";
 import {AppState} from '../store/configureStore'
 import SimpleSelect from './Dropdown'
+import EnhancedTable from './EnhancedTable'
 
 interface AppProps{
 
@@ -32,6 +33,7 @@ export class App extends React.Component<Props>{
     return(
       <div>
         <SimpleSelect></SimpleSelect>
+        <EnhancedTable></EnhancedTable>
       </div>
     )
     

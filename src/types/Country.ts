@@ -5,7 +5,6 @@ export interface CountryState {
 
 export class Country {
     Country:string
-    Slug?:string
     NewConfirmed:number
     TotalConfirmed: number
     NewDeaths: number
