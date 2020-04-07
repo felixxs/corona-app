@@ -133,19 +133,7 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const EnhancedTableToolbar = () => {
-  const classes = useToolbarStyles();
 
-  return (
-    <Toolbar
-      className={clsx(classes.root)}
-    >
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          CoronaTable
-        </Typography>
-    </Toolbar>
-  );
-};
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -218,7 +206,6 @@ export function EnhancedTable(props:Props) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar />
         <TableContainer>
           <Table
             className={classes.table}

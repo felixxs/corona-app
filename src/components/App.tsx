@@ -4,11 +4,13 @@ import {bindActionCreators} from 'redux'
 import { fetchCoronaData} from '../actions/countries'
 import { ThunkDispatch } from 'redux-thunk';
 import { AppActions } from '../types/actions';
-import { CountryState} from "../types/Country";
+import { CountryState, UserInteractionState} from "../types/Country";
 import {AppState} from '../store/configureStore'
 import SimpleSelect from './Dropdown'
 import EnhancedTable from './EnhancedTable'
 import TabBar from './TabBar'
+import Chart from './Chart'
+
 
 interface AppProps{
 
@@ -31,10 +33,21 @@ export class App extends React.Component<Props>{
   
 
   render(){
+
+    const showChart = this.props.user.showChart
+    let tab
+
+    if(showChart){
+      tab=<Chart></Chart>
+    }
+    else {
+      tab=<EnhancedTable></EnhancedTable>
+    }
     return(
       <div>
         <SimpleSelect></SimpleSelect>
-        <EnhancedTable></EnhancedTable>
+        <TabBar></TabBar>
+        {tab} 
       </div>
     )
     
@@ -46,6 +59,7 @@ export class App extends React.Component<Props>{
 
 interface LinkStateProps{
   countries: CountryState
+  user: UserInteractionState
 }
 
 
@@ -56,7 +70,8 @@ interface LinkDispatchProps{
 
 
 const mapStateToProps = (state: AppState, ownProps: AppProps): LinkStateProps =>({
-  countries: state.countries
+  countries: state.countries,
+  user: state.userinteraction
 })
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions >, ownProps:AppProps):LinkDispatchProps => ({

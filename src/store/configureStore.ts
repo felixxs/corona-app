@@ -1,12 +1,13 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
-import {countryReducer} from '../reducers/country'
+import {countryReducer, userInteractionReducer} from '../reducers/country'
 import thunk, { ThunkMiddleware } from 'redux-thunk'
 import { AppActions } from '../types/actions'
 
 
 
 export const rootReducer = combineReducers({
-    countries: countryReducer
+    countries: countryReducer,
+    userinteraction: userInteractionReducer
 })
 
 export type AppState = ReturnType<typeof rootReducer>

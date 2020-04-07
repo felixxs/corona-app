@@ -1,14 +1,10 @@
-import {GET_COUNTRIES, AppActions, SET_CURRENT_COUNTRY, ADD_COUNTRY, GET_DAY_ONE_DATA_COUNTRY} from '../types/actions'
-import { Country, DayOneData } from '../types/Country'
+import {GET_COUNTRIES, AppActions, SET_CURRENT_COUNTRIES, ADD_COUNTRY, GET_DAY_ONE_DATA_COUNTRIES} from '../types/actions'
+import { Country, iDayOneData} from '../types/Country'
 import { Dispatch } from "redux"
 import { AppState } from '../store/configureStore'
 
-
-
-
-
-export const setCurrentCountry = (name:string []):AppActions => ({
-    type:SET_CURRENT_COUNTRY,
+export const setCurrentCountries = (name:string []):AppActions => ({
+    type:SET_CURRENT_COUNTRIES,
     name
 })
 
@@ -22,17 +18,22 @@ export const addCountry = (country : Country):AppActions => ({
     country
 })
 
-export const getDayOneDataCountry = (dayOneData : DayOneData):AppActions => ({
-    type: GET_DAY_ONE_DATA_COUNTRY,
+export const getDayOneDataCountrys = (dayOneData : iDayOneData[]):AppActions => ({
+    type: GET_DAY_ONE_DATA_COUNTRIES,
     dayOneData
 })
 
 export function fetchDayOneDataCountry(){
     return (dispatch: Dispatch<AppActions>, getState:()=> AppState) => {
 
+        let allDayOneDataArrays: iDayOneData [] = []
+
         getState().countries.currentCountry.forEach(element => {
 
-            fetch('https://api.covid19api.com/total/dayone/country/`${element}`/status/confirmed')
+             let country = getState().countries.countries.find(country => element===country.Country)
+
+
+            fetch(`https://api.covid19api.com/total/dayone/country/${country?.Slug}/status/confirmed`)
 
             .then((response) => {
                 if (!response.ok) {
@@ -42,11 +43,17 @@ export function fetchDayOneDataCountry(){
             })
             .then((response) => response.json())
             .then((items) => {
-
+                let name: string = items[0].Country
+                let data: number [] = []
                 items.forEach((element:any) => {
-                    let dayoneData = new DayOneData(element)
-                    dispatch(getDayOneDataCountry(dayoneData)) 
+                    let tupel : number = element.Cases as number
+                    data.push(tupel)
                 })
+                let idayOneData : iDayOneData = {
+                    name,
+                    data
+                } 
+             allDayOneDataArrays.push(idayOneData)
              console.log(getState())  
             })
             .catch(() => console.log("Error fetching data"));
@@ -54,7 +61,7 @@ export function fetchDayOneDataCountry(){
             
         });
 
-        
+        dispatch(getDayOneDataCountrys(allDayOneDataArrays))
     };
 
 }
@@ -85,8 +92,7 @@ export function fetchCoronaData(url:string) {
 
 export function startSettingCurrentCountry(name:string[]){
     return (dispatch: Dispatch<AppActions>, getState:()=> AppState) => {
-        dispatch(setCurrentCountry(name))
-        console.log(getState()) 
+        dispatch(setCurrentCountries(name))
 }
 
 }

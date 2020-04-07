@@ -1,25 +1,46 @@
 export interface CountryState {
     countries: Country[],
     currentCountry: string []
-    dayOneData: DayOneData[]
+    dayOneData: iDayOneData[]
+}
+
+export interface UserInteractionState {
+    showChart:boolean
 }
 
 export class DayOneData{
-    country:string
-    date:number[]
-    confirmedCorona: number []
+
+    Country: string
+    CountryCode: string
+    Lat: number
+    Lon: number
+    Cases: number
+    Status: string
+    Date: string
+
 
     constructor(DayOneResponse: any){
-        this.country = DayOneResponse.Country
-        this.date = DayOneResponse.data
-        this.confirmedCorona = DayOneResponse.confirmedCorona
-    
-    }
+        this.Country = DayOneResponse.Country
+        this.CountryCode = DayOneResponse.CountryCode
+        this.Lat = DayOneResponse.Lat
+        this.Lon = DayOneResponse.Lon
+        this.Cases = DayOneResponse.Cases
+        this.Status =DayOneResponse.Status 
+        this.Date = DayOneResponse.Date
 
+    }
+}
+
+export interface iDayOneData{
+    
+    name:string 
+    data:number[]
+    
 }
 
 export class Country {
     Country:string
+    Slug:string
     NewConfirmed:number
     TotalConfirmed: number
     NewDeaths: number
@@ -29,6 +50,7 @@ export class Country {
 
     constructor(countryResponse: any){
         this.Country = countryResponse.Country
+        this.Slug = countryResponse.Slug
         this.NewConfirmed = countryResponse.NewConfirmed
         this.TotalConfirmed = countryResponse.TotalConfirmed
         this.NewDeaths = countryResponse.NewDeaths

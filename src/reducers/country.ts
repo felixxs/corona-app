@@ -1,10 +1,31 @@
-import { CountryState, DayOneData } from "../types/Country";
-import { AppActions, GET_COUNTRIES, SET_CURRENT_COUNTRY, ADD_COUNTRY, GET_DAY_ONE_DATA_COUNTRY} from "../types/actions"
+import { CountryState, UserInteractionState } from "../types/Country";
+import { AppActions, GET_COUNTRIES, SET_CURRENT_COUNTRIES, ADD_COUNTRY, GET_DAY_ONE_DATA_COUNTRIES, SWITCH_TABS} from "../types/actions"
 
 const countryReducerDefaultState: CountryState = {
     countries:[],
     currentCountry:[],
-    dayOneData: []
+    dayOneData: [{
+        name:"Andorra", 
+        data:[4,5,6,7,8,1,1,1,1,1,1,1]
+    }]
+}
+
+const userInteractionReducerDefaultState: UserInteractionState ={
+    showChart:false
+}
+
+
+
+const userInteractionReducer = (state = userInteractionReducerDefaultState, action: AppActions): UserInteractionState =>{
+    switch(action.type){
+        case SWITCH_TABS:
+            return{
+                ...state,
+                showChart:action.showChart
+            }
+        default: 
+            return state
+    }
 }
 
 const countryReducer = (state = countryReducerDefaultState, action: AppActions): CountryState => {
@@ -14,7 +35,7 @@ const countryReducer = (state = countryReducerDefaultState, action: AppActions):
                 ...state, 
                 countries: action.countries
             }
-        case SET_CURRENT_COUNTRY:
+        case SET_CURRENT_COUNTRIES:
             return{
                 ...state,
                 currentCountry: action.name
@@ -24,10 +45,10 @@ const countryReducer = (state = countryReducerDefaultState, action: AppActions):
                 ...state,
                 countries: [...state.countries, action.country]
             }
-        case GET_DAY_ONE_DATA_COUNTRY:
+        case GET_DAY_ONE_DATA_COUNTRIES:
             return{
                 ...state,
-                dayOneData: [...state.dayOneData,action.dayOneData]
+                dayOneData: action.dayOneData
             }
         default:
             return state
@@ -36,3 +57,4 @@ const countryReducer = (state = countryReducerDefaultState, action: AppActions):
 }
 
 export {countryReducer}
+export {userInteractionReducer}

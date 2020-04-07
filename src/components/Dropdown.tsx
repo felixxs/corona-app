@@ -5,7 +5,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import { startSettingCurrentCountry} from '../actions/countries'
+import { startSettingCurrentCountry, fetchDayOneDataCountry} from '../actions/countries'
 import { ThunkDispatch } from 'redux-thunk';
 import { AppActions } from '../types/actions';
 import { CountryState } from "../types/Country";
@@ -65,6 +65,7 @@ export function SimpleSelect(props:Props) {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setCountry(event.target.value as string[]);
     props.startSettingCurrentCountry(event.target.value as string[])
+    props.fetchDayOneDataCountry()
   };
 
   function getStyles(name: string, country: string[], theme: Theme) {
@@ -117,6 +118,7 @@ interface LinkStateProps{
   
   interface LinkDispatchProps{
     startSettingCurrentCountry: (name:string[]) => void
+    fetchDayOneDataCountry:() => void
   }
   
   
@@ -126,7 +128,8 @@ interface LinkStateProps{
   })
   
   const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions >, ownProps:AppProps):LinkDispatchProps => ({
-    startSettingCurrentCountry:bindActionCreators(startSettingCurrentCountry, dispatch)
+    startSettingCurrentCountry:bindActionCreators(startSettingCurrentCountry, dispatch),
+    fetchDayOneDataCountry:bindActionCreators(fetchDayOneDataCountry, dispatch)
   })
   
   export default connect(mapStateToProps, mapDispatchToProps)(SimpleSelect);
