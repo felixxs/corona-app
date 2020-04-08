@@ -8,7 +8,7 @@ import {bindActionCreators} from 'redux'
 import { switchTabs} from '../actions/user'
 import { ThunkDispatch } from 'redux-thunk';
 import { AppActions } from '../types/actions';
-import { CountryState, UserInteractionState} from "../types/Country";
+import { UserInteractionState} from "../types/Country";
 import {AppState} from '../store/configureStore'
 
 const useStyles = makeStyles({
@@ -29,7 +29,6 @@ export function CenteredTabs(props:Props) {
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
-    console.log(newValue)
     if(newValue===1){
         props.switchTabs(true)
     } else {

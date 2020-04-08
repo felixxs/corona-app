@@ -7,6 +7,7 @@ import { AppActions } from '../types/actions';
 import { CountryState} from "../types/Country";
 import {AppState} from '../store/configureStore'
 import ChartistGraph from 'react-chartist'
+import {ILineChartOptions } from 'chartist';
 
 
 interface AppProps{
@@ -14,38 +15,29 @@ interface AppProps{
 
 type Props = AppProps & LinkDispatchProps & LinkStateProps 
 
+export function LineChart (props:Props){
 
-
-export class LineChart extends React.Component<Props> {
-    constructor(props:Props){
-        super(props)
+    const options : ILineChartOptions = {
+        showLine:true,
+        fullWidth:true,
+        low:0,
+        chartPadding: {
+            right: 40
+        }
     }
-
-   
-    
-    
-      
-    componentDidUpdate(){ 
-
-    }
- 
-
-    render() {
-
-        var simpleLineChartData = {
-            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-            series: this.props.countries.dayOneData
-          }
-    
-        var type = 'Line'
-    
+            
+    if(props.countries.chartData.length===0){
+        return <h1>Bitte Land auswählen</h1>
+    } else {
         return (
-          <div>
-            <ChartistGraph data={simpleLineChartData}  type={type} />
-          </div>
+            <div>
+                {props.countries.chartData.map(element => <ChartistGraph data={element} options={options} type={'Line'}/>)}
+            </div>
         )
-      }
+        }
+        
 }
+
 
   interface LinkStateProps{
     countries: CountryState
@@ -53,16 +45,15 @@ export class LineChart extends React.Component<Props> {
   
   
   interface LinkDispatchProps{
+    startSettingCurrentCountry: (name:string[]) => void
   }
-  
-  
   
   const mapStateToProps = (state: AppState, ownProps: AppProps): LinkStateProps =>({
     countries: state.countries
   })
   
   const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions >, ownProps:AppProps):LinkDispatchProps => ({
-    startSettingCurrentCountry:bindActionCreators(startSettingCurrentCountry, dispatch)
+    startSettingCurrentCountry:bindActionCreators(startSettingCurrentCountry, dispatch),
   })
   
   export default connect(mapStateToProps, mapDispatchToProps)(LineChart);

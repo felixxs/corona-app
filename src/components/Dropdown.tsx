@@ -77,8 +77,6 @@ export function SimpleSelect(props:Props) {
     };
   }
 
-  
-
   return (
     <div>
         <FormControl className={classes.formControl}>
@@ -113,13 +111,13 @@ export function SimpleSelect(props:Props) {
 
 interface LinkStateProps{
     countries: CountryState
-  }
+}
   
   
-  interface LinkDispatchProps{
+interface LinkDispatchProps{
     startSettingCurrentCountry: (name:string[]) => void
     fetchDayOneDataCountry:() => void
-  }
+}
   
   
   

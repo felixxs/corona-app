@@ -23,14 +23,9 @@ type Props = AppProps & LinkDispatchProps & LinkStateProps
 
 export class App extends React.Component<Props>{
 
-
-
   componentDidMount() {
   this.props.fetchCoronaData('https://api.covid19api.com/summary');
-  console.log(this.props.countries.countries)
   }
-
-  
 
   render(){
 
@@ -66,8 +61,6 @@ interface LinkStateProps{
 interface LinkDispatchProps{
   fetchCoronaData: (url : string) => void
 }
-
-
 
 const mapStateToProps = (state: AppState, ownProps: AppProps): LinkStateProps =>({
   countries: state.countries,

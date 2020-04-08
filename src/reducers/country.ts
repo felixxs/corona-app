@@ -1,19 +1,15 @@
 import { CountryState, UserInteractionState } from "../types/Country";
-import { AppActions, GET_COUNTRIES, SET_CURRENT_COUNTRIES, ADD_COUNTRY, GET_DAY_ONE_DATA_COUNTRIES, SWITCH_TABS} from "../types/actions"
+import { AppActions, SET_CURRENT_COUNTRIES, ADD_COUNTRY, SWITCH_TABS, GET_CHART_DATA} from "../types/actions"
 
 const countryReducerDefaultState: CountryState = {
     countries:[],
     currentCountry:[],
-    dayOneData: [{
-        name:"Andorra", 
-        data:[4,5,6,7,8,1,1,1,1,1,1,1]
-    }]
+    chartData: []
 }
 
 const userInteractionReducerDefaultState: UserInteractionState ={
     showChart:false
 }
-
 
 
 const userInteractionReducer = (state = userInteractionReducerDefaultState, action: AppActions): UserInteractionState =>{
@@ -30,11 +26,6 @@ const userInteractionReducer = (state = userInteractionReducerDefaultState, acti
 
 const countryReducer = (state = countryReducerDefaultState, action: AppActions): CountryState => {
     switch(action.type){
-        case GET_COUNTRIES:
-            return {
-                ...state, 
-                countries: action.countries
-            }
         case SET_CURRENT_COUNTRIES:
             return{
                 ...state,
@@ -45,10 +36,10 @@ const countryReducer = (state = countryReducerDefaultState, action: AppActions):
                 ...state,
                 countries: [...state.countries, action.country]
             }
-        case GET_DAY_ONE_DATA_COUNTRIES:
+        case GET_CHART_DATA:
             return{
                 ...state,
-                dayOneData: action.dayOneData
+                chartData: action.chartData
             }
         default:
             return state

@@ -1,41 +1,16 @@
 export interface CountryState {
     countries: Country[],
     currentCountry: string []
-    dayOneData: iDayOneData[]
+    chartData: GraphData []
 }
 
 export interface UserInteractionState {
     showChart:boolean
 }
 
-export class DayOneData{
-
-    Country: string
-    CountryCode: string
-    Lat: number
-    Lon: number
-    Cases: number
-    Status: string
-    Date: string
-
-
-    constructor(DayOneResponse: any){
-        this.Country = DayOneResponse.Country
-        this.CountryCode = DayOneResponse.CountryCode
-        this.Lat = DayOneResponse.Lat
-        this.Lon = DayOneResponse.Lon
-        this.Cases = DayOneResponse.Cases
-        this.Status =DayOneResponse.Status 
-        this.Date = DayOneResponse.Date
-
-    }
-}
-
-export interface iDayOneData{
-    
-    name:string 
-    data:number[]
-    
+export interface GraphData{
+    labels: string[]
+    series: [number[]]
 }
 
 export class Country {

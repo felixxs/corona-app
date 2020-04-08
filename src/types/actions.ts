@@ -1,17 +1,12 @@
-import { Country, iDayOneData } from "./Country";
+import { Country, GraphData } from "./Country";
 
 export const GET_COUNTRIES = 'GET_COUNTRIES'
 export const SET_CURRENT_COUNTRIES = 'SET_CURRENT_COUNTRY'
 export const ADD_COUNTRY = 'ADD_COUNTRY'
 export const GET_DAY_ONE_DATA_COUNTRIES = 'GET_DAY_ONE_DATA_COUNTRY'
+export const GET_CHART_DATA = 'GET_CHART_DATA'
 
 export const SWITCH_TABS = 'SWITCH_TABS'
-
-
-export interface GetCountriesAction{
-    type: typeof GET_COUNTRIES, 
-    countries: []
-}
 
 export interface SetCurrentCountries {
     type: typeof SET_CURRENT_COUNTRIES
@@ -23,18 +18,18 @@ export interface AddCountry{
     country: Country
 }
 
-export interface getDayOneDataCountries{
-    type: typeof GET_DAY_ONE_DATA_COUNTRIES
-    dayOneData: iDayOneData []
-}
-
 export interface switchTabsAction{
     type:typeof SWITCH_TABS
     showChart: boolean
 }
 
+export interface getChartLabel{
+    type: typeof GET_CHART_DATA
+    chartData: GraphData []
+}
 
-export type CountryActionsTypes = GetCountriesAction | SetCurrentCountries | AddCountry | getDayOneDataCountries
+
+export type CountryActionsTypes =  SetCurrentCountries | AddCountry | getChartLabel
 
 export type UserInteractionActionTypes = switchTabsAction
 
