@@ -63,9 +63,10 @@ export function SimpleSelect(props:Props) {
     const [country, setCountry] = React.useState<string[]>([]);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setCountry(event.target.value as string[]);
-    props.startSettingCurrentCountry(event.target.value as string[])
-    props.fetchDayOneDataCountry()
+    const countries = event.target.value as string[];
+    setCountry(countries);
+    // props.startSettingCurrentCountry(countries)
+    props.fetchDayOneDataCountry(countries);
   };
 
   function getStyles(name: string, country: string[], theme: Theme) {
@@ -98,7 +99,7 @@ export function SimpleSelect(props:Props) {
           MenuProps={MenuProps}
         >
           {props.countries.countries.map((name) => (
-            <MenuItem key={name.Country} value={name.Country} style={getStyles(name.Country, country, theme)}>
+            <MenuItem key={name.Country} value={name.Slug} style={getStyles(name.Country, country, theme)}>
               {name.Country}
             </MenuItem>
           ))}
@@ -116,7 +117,7 @@ interface LinkStateProps{
   
 interface LinkDispatchProps{
     startSettingCurrentCountry: (name:string[]) => void
-    fetchDayOneDataCountry:() => void
+    fetchDayOneDataCountry:(countries?: string[]) => void
 }
   
   

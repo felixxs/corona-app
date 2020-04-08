@@ -1,21 +1,21 @@
 import React from 'react';
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import { fetchCoronaData} from '../actions/countries'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fetchCoronaData } from '../actions/countries'
 import { ThunkDispatch } from 'redux-thunk';
 import { AppActions } from '../types/actions';
-import { CountryState, UserInteractionState} from "../types/Country";
-import {AppState} from '../store/configureStore'
+import { CountryState, UserInteractionState } from "../types/Country";
+import { AppState } from '../store/configureStore'
 import SimpleSelect from './Dropdown'
 import EnhancedTable from './EnhancedTable'
 import TabBar from './TabBar'
 import Chart from './Chart'
 
 
-interface AppProps{
+interface AppProps {
 
 }
-interface ComponentAppState{
+interface ComponentAppState {
 
 }
 
@@ -24,51 +24,51 @@ type Props = AppProps & LinkDispatchProps & LinkStateProps
 export class App extends React.Component<Props>{
 
   componentDidMount() {
-  this.props.fetchCoronaData('https://api.covid19api.com/summary');
+    this.props.fetchCoronaData('https://api.covid19api.com/summary');
   }
 
-  render(){
+  render() {
 
     const showChart = this.props.user.showChart
     let tab
 
-    if(showChart){
-      tab=<Chart></Chart>
+    if (showChart) {
+      tab = <Chart></Chart>
     }
     else {
-      tab=<EnhancedTable></EnhancedTable>
+      tab = <EnhancedTable></EnhancedTable>
     }
-    return(
+    return (
       <div>
         <SimpleSelect></SimpleSelect>
         <TabBar></TabBar>
-        {tab} 
+        {tab}
       </div>
     )
-    
-    
+
+
 
   }
 
 }
 
-interface LinkStateProps{
+interface LinkStateProps {
   countries: CountryState
   user: UserInteractionState
 }
 
 
-interface LinkDispatchProps{
-  fetchCoronaData: (url : string) => void
+interface LinkDispatchProps {
+  fetchCoronaData: (url: string) => void
 }
 
-const mapStateToProps = (state: AppState, ownProps: AppProps): LinkStateProps =>({
+const mapStateToProps = (state: AppState, ownProps: AppProps): LinkStateProps => ({
   countries: state.countries,
   user: state.userinteraction
 })
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions >, ownProps:AppProps):LinkDispatchProps => ({
-  fetchCoronaData:bindActionCreators(fetchCoronaData, dispatch)
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, ownProps: AppProps): LinkDispatchProps => ({
+  fetchCoronaData: bindActionCreators(fetchCoronaData, dispatch)
 })
 
 

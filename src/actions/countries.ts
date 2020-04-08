@@ -18,16 +18,21 @@ export const getChartData = (chartData: GraphData []):AppActions => ({
     chartData
 })
 
-export function fetchDayOneDataCountry(){
+export function fetchDayOneDataCountry(countries?: string[]){
     return (dispatch: Dispatch<AppActions>, getState:()=> AppState) => {
 
         let graphDataArray: GraphData [] = []
             
-        getState().countries.currentCountry.forEach(element => {
+        countries = countries || getState().countries.currentCountry;
+        // das da oben ist einfach nur syntax sugar für das hier
+        // if(countries === undefined) {
+        //     countries = getState().countries.currentCountry;
+        // }
 
-            let country = getState().countries.countries.find(country => element===country.Country)
 
-            fetch(`https://api.covid19api.com/total/dayone/country/${country?.Slug}/status/confirmed`)
+        countries.forEach(element => {
+
+            fetch(`https://api.covid19api.com/total/dayone/country/${element}/status/confirmed`)
 
             .then((response) => {
                 if (!response.ok) {
@@ -40,23 +45,23 @@ export function fetchDayOneDataCountry(){
                 let cases: number [] = []
                 let dates: string [] = []
 
-                items.forEach((element:any) => {
-                    let label : string = element.Date.slice(0,10)
-                    let tupel : number = element.Cases as number
+                for(const item of items) {
+                    let label : string = item.Date.slice(0,10)
+                    let tupel : number = item.Cases as number
                     cases.push(tupel)
                     dates.push(label)
-                })
+                }
 
-                let graphData : GraphData = {
+                const graphData : GraphData = {
                     labels: dates,
                     series: [cases]
                 } 
-             graphDataArray.push(graphData)
+
+                graphDataArray.push(graphData);
+                dispatch(getChartData(graphDataArray))
             })
             .catch(() => console.log("Error fetching data"));    
         })
-
-        dispatch(getChartData(graphDataArray))
     }
 
 }
