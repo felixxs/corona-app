@@ -1,5 +1,5 @@
 import { CountryState, UserInteractionState } from "../types/Country";
-import { AppActions, SET_CURRENT_COUNTRIES, GET_COUNTRIES, SWITCH_TABS, GET_CHART_DATA, GET_GLOBAL_DATA, FETCH_DATA_PENDING} from "../types/actions"
+import { AppActions, SET_CURRENT_COUNTRIES, GET_COUNTRIES, SWITCH_TABS, GET_CHART_DATA, GET_GLOBAL_DATA, FETCH_DATA_PENDING, SWITCH_CHART_TYPE} from "../types/actions"
 
 const countryReducerDefaultState: CountryState = {
     countries:[],
@@ -17,7 +17,8 @@ const countryReducerDefaultState: CountryState = {
 }
 
 const userInteractionReducerDefaultState: UserInteractionState ={
-    showChart:false
+    showChart:false,
+    chart: 'linechart'
 }
 
 
@@ -27,6 +28,11 @@ const userInteractionReducer = (state = userInteractionReducerDefaultState, acti
             return{
                 ...state,
                 showChart:action.showChart
+            }
+        case SWITCH_CHART_TYPE:
+            return{
+                ...state,
+                chart:action.chart
             }
         default: 
             return state

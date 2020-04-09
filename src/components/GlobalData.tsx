@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { startSettingCurrentCountry } from '../actions/countries'
 import { ThunkDispatch } from 'redux-thunk';
 import { AppActions } from '../types/actions';
-import { CountryState, UserInteractionState } from "../types/Country";
+import { CountryState } from "../types/Country";
 import { AppState } from '../store/configureStore'
 import ChartistGraph from 'react-chartist'
 import { ILineChartOptions } from 'chartist'
@@ -41,33 +41,25 @@ export function LineChart(props: Props) {
     ]
   }
 
-  if(props.users.chart==='linechart'){
+  if (props.countries.chartData.length === 0) {
+    return <h1>Bitte Land auswählen</h1>
+  } else {
     return (
       <div>
         {props.countries.chartData.map(element => 
         <div>
             <h1>{props.countries.currentCountry[props.countries.chartData.indexOf(element)]}</h1>
-            <ChartistGraph data={element} options={lineChartOptions} type={'Line'} />
+            <ChartistGraph data={element} options={lineChartOptions} type={'Bar'} />
         </div>)}
       </div>
     )
-  } else {
-      return (
-    <div>
-      {props.countries.chartData.map(element => 
-      <div>
-          <h1>{props.countries.currentCountry[props.countries.chartData.indexOf(element)]}</h1>
-          <ChartistGraph data={element} options={lineChartOptions} type={'Bar'} />
-      </div>)}
-    </div>
-  )}
+  }
 
 }
 
 
 interface LinkStateProps {
   countries: CountryState
-  users: UserInteractionState
 }
 
 
@@ -76,8 +68,7 @@ interface LinkDispatchProps {
 }
 
 const mapStateToProps = (state: AppState, ownProps: AppProps): LinkStateProps => ({
-  countries: state.countries,
-  users: state.userinteraction
+  countries: state.countries
 })
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, ownProps: AppProps): LinkDispatchProps => ({

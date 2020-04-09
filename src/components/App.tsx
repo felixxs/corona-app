@@ -11,6 +11,7 @@ import EnhancedTable from './EnhancedTable'
 import TabBar from './TabBar'
 import Chart from './Chart'
 import {Spinner} from './Spinner'
+import  RadioButtonsGroup  from './RadioButton';
 
 
 interface AppProps {
@@ -40,7 +41,10 @@ export class App extends React.Component<Props>{
     }
 
     if (showChart) {
-      tab = <Chart></Chart>
+      tab = <div>
+              <RadioButtonsGroup></RadioButtonsGroup>
+              <Chart/>
+            </div>
     }
     else {
       tab = <EnhancedTable></EnhancedTable>

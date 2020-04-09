@@ -8,6 +8,7 @@ export interface CountryState {
 
 export interface UserInteractionState {
     showChart:boolean
+    chart: string
 }
 
 export interface GraphData{
