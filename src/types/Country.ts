@@ -2,6 +2,8 @@ export interface CountryState {
     countries: Country[],
     currentCountry: string []
     chartData: GraphData []
+    globalData: GlobalData
+    pending: boolean
 }
 
 export interface UserInteractionState {
@@ -11,6 +13,15 @@ export interface UserInteractionState {
 export interface GraphData{
     labels: string[]
     series: [number[]]
+}
+
+export interface GlobalData{
+    NewConfirmed: number
+    TotalConfirmed: number
+    NewDeaths: number
+    TotalDeaths: number
+    NewRecovered: number
+    TotalRecovered: number
 }
 
 export class Country {
@@ -34,3 +45,4 @@ export class Country {
         this.TotalRecovered = countryResponse.TotalRecovered
     }
 }
+

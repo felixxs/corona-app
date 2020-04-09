@@ -1,10 +1,11 @@
-import { Country, GraphData } from "./Country";
+import { Country, GraphData, GlobalData} from "./Country";
 
-export const GET_COUNTRIES = 'GET_COUNTRIES'
 export const SET_CURRENT_COUNTRIES = 'SET_CURRENT_COUNTRY'
-export const ADD_COUNTRY = 'ADD_COUNTRY'
-export const GET_DAY_ONE_DATA_COUNTRIES = 'GET_DAY_ONE_DATA_COUNTRY'
+export const GET_COUNTRIES = 'ADD_COUNTRY'
 export const GET_CHART_DATA = 'GET_CHART_DATA'
+export const GET_GLOBAL_DATA = 'GET_GLOBAL_DATA'
+export const FETCH_DATA_PENDING ='FETCH_DATA_PENDING'
+export const FETCH_DATA_SUCCESS =''
 
 export const SWITCH_TABS = 'SWITCH_TABS'
 
@@ -13,23 +14,33 @@ export interface SetCurrentCountries {
     name: string []
 }
 
-export interface AddCountry{
-    type: typeof ADD_COUNTRY
-    country: Country
+export interface getCountries{
+    type: typeof GET_COUNTRIES
+    countries: Country []
 }
+
+export interface getChartData{
+    type: typeof GET_CHART_DATA
+    chartData: GraphData []
+}
+
+export interface getGlobalData{
+    type: typeof GET_GLOBAL_DATA
+    globalData : GlobalData
+}
+
+export interface fetchDataPending{
+    type: typeof FETCH_DATA_PENDING
+}
+
 
 export interface switchTabsAction{
     type:typeof SWITCH_TABS
     showChart: boolean
 }
 
-export interface getChartLabel{
-    type: typeof GET_CHART_DATA
-    chartData: GraphData []
-}
 
-
-export type CountryActionsTypes =  SetCurrentCountries | AddCountry | getChartLabel
+export type CountryActionsTypes =  SetCurrentCountries | getCountries | getChartData | getGlobalData | fetchDataPending
 
 export type UserInteractionActionTypes = switchTabsAction
 

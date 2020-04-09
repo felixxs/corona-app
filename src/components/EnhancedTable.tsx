@@ -167,8 +167,6 @@ export function EnhancedTable(props:Props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-
   
   let rows = props.countries.countries.filter(country => props.countries.currentCountry.includes(country.Country))
 

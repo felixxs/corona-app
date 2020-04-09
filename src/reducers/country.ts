@@ -1,10 +1,19 @@
 import { CountryState, UserInteractionState } from "../types/Country";
-import { AppActions, SET_CURRENT_COUNTRIES, ADD_COUNTRY, SWITCH_TABS, GET_CHART_DATA} from "../types/actions"
+import { AppActions, SET_CURRENT_COUNTRIES, GET_COUNTRIES, SWITCH_TABS, GET_CHART_DATA, GET_GLOBAL_DATA, FETCH_DATA_PENDING} from "../types/actions"
 
 const countryReducerDefaultState: CountryState = {
     countries:[],
     currentCountry:[],
-    chartData: []
+    chartData: [],
+    globalData: {
+        NewConfirmed:0,
+        TotalConfirmed:0,
+        NewDeaths:0,
+        TotalDeaths:0,
+        NewRecovered:0, 
+        TotalRecovered:0
+    },
+    pending:false
 }
 
 const userInteractionReducerDefaultState: UserInteractionState ={
@@ -31,15 +40,27 @@ const countryReducer = (state = countryReducerDefaultState, action: AppActions):
                 ...state,
                 currentCountry: action.name
             }
-        case ADD_COUNTRY: 
+        case GET_COUNTRIES: 
             return {
                 ...state,
-                countries: [...state.countries, action.country]
+                pending:false,
+                countries: action.countries
             }
         case GET_CHART_DATA:
             return{
                 ...state,
+                pending:false,
                 chartData: action.chartData
+            }
+        case GET_GLOBAL_DATA:
+            return{
+                ...state,
+                globalData: action.globalData
+            }
+        case FETCH_DATA_PENDING:
+            return{
+                ...state,
+                pending:true
             }
         default:
             return state

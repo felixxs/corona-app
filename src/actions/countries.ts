@@ -1,5 +1,5 @@
-import {AppActions, SET_CURRENT_COUNTRIES, ADD_COUNTRY, GET_CHART_DATA} from '../types/actions'
-import { Country, GraphData} from '../types/Country'
+import {AppActions, SET_CURRENT_COUNTRIES, GET_CHART_DATA, GET_GLOBAL_DATA, GET_COUNTRIES, FETCH_DATA_PENDING} from '../types/actions'
+import { Country, GraphData, GlobalData} from '../types/Country'
 import { Dispatch } from "redux"
 import { AppState } from '../store/configureStore'
 
@@ -8,28 +8,34 @@ export const setCurrentCountries = (name:string []):AppActions => ({
     name
 })
 
-export const addCountry = (country : Country):AppActions => ({
-    type:ADD_COUNTRY,
-    country
+export const getCountries = (countries : Country[]):AppActions => ({
+    type:GET_COUNTRIES,
+    countries,
 })
 
 export const getChartData = (chartData: GraphData []):AppActions => ({
     type: GET_CHART_DATA,
-    chartData
+    chartData,
+})
+
+export const getGlobalData = (globalData: GlobalData):AppActions => ({
+    type: GET_GLOBAL_DATA,
+    globalData
+})
+
+export const fetchDataPending = ():AppActions => ({
+    type: FETCH_DATA_PENDING
 })
 
 export function fetchDayOneDataCountry(countries?: string[]){
     return (dispatch: Dispatch<AppActions>, getState:()=> AppState) => {
 
+        dispatch(fetchDataPending())
+
         let graphDataArray: GraphData [] = []
             
         countries = countries || getState().countries.currentCountry;
-        // das da oben ist einfach nur syntax sugar für das hier
-        // if(countries === undefined) {
-        //     countries = getState().countries.currentCountry;
-        // }
-
-
+    
         countries.forEach(element => {
 
             fetch(`https://api.covid19api.com/total/dayone/country/${element}/status/confirmed`)
@@ -46,7 +52,7 @@ export function fetchDayOneDataCountry(countries?: string[]){
                 let dates: string [] = []
 
                 for(const item of items) {
-                    let label : string = item.Date.slice(0,10)
+                    let label : string = item.Date.slice(5,10)
                     let tupel : number = item.Cases as number
                     cases.push(tupel)
                     dates.push(label)
@@ -68,6 +74,9 @@ export function fetchDayOneDataCountry(countries?: string[]){
 
 export function fetchCoronaData(url:string) {
     return (dispatch: Dispatch<AppActions>, getState:()=> AppState) => {
+
+        dispatch(fetchDataPending())
+        console.log(getState().countries.pending)
         fetch(url)
             .then((response) => {
                 if (!response.ok) {
@@ -79,10 +88,17 @@ export function fetchCoronaData(url:string) {
             .then((response) => response.json())
             .then((items) => {
 
-                items.Countries.forEach((element:any) => {
-                    let country = new Country(element)
-                    dispatch(addCountry(country)) 
-                })
+                dispatch(getGlobalData(items.Global))
+
+                let countryArray : Country[] = []
+                for(const item of items.Countries) { 
+                    if(item.TotalConfirmed>0){
+                        let country = new Country(item)
+                        countryArray.push(country)
+                    }                     
+                }
+                dispatch(getCountries(countryArray))
+                console.log(getState().countries.pending)
             })
             .catch(() => console.log("Error fetching data"));
     };

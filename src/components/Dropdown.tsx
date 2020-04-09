@@ -65,7 +65,7 @@ export function SimpleSelect(props:Props) {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     const countries = event.target.value as string[];
     setCountry(countries);
-    // props.startSettingCurrentCountry(countries)
+    props.startSettingCurrentCountry(countries)
     props.fetchDayOneDataCountry(countries);
   };
 
@@ -99,7 +99,7 @@ export function SimpleSelect(props:Props) {
           MenuProps={MenuProps}
         >
           {props.countries.countries.map((name) => (
-            <MenuItem key={name.Country} value={name.Slug} style={getStyles(name.Country, country, theme)}>
+            <MenuItem key={name.Country} value={name.Country} style={getStyles(name.Country, country, theme)}>
               {name.Country}
             </MenuItem>
           ))}

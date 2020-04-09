@@ -10,6 +10,7 @@ import SimpleSelect from './Dropdown'
 import EnhancedTable from './EnhancedTable'
 import TabBar from './TabBar'
 import Chart from './Chart'
+import {Spinner} from './Spinner'
 
 
 interface AppProps {
@@ -30,7 +31,13 @@ export class App extends React.Component<Props>{
   render() {
 
     const showChart = this.props.user.showChart
+    const loading = this.props.countries.pending
     let tab
+    let spinner
+
+    if(loading){
+      spinner=  <Spinner></Spinner>
+    }
 
     if (showChart) {
       tab = <Chart></Chart>
@@ -42,6 +49,7 @@ export class App extends React.Component<Props>{
       <div>
         <SimpleSelect></SimpleSelect>
         <TabBar></TabBar>
+        {spinner}
         {tab}
       </div>
     )
