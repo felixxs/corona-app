@@ -7,13 +7,17 @@ import { AppActions } from '../types/actions';
 import { CountryState } from "../types/Country";
 import { AppState } from '../store/configureStore'
 import ChartistGraph from 'react-chartist'
-import { ILineChartOptions } from 'chartist'
+import { IPieChartOptions } from 'chartist'
 import Chartist from 'chartist'
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
 
 window["Chartist"] = Chartist;
 
 const pointLabels = require("chartist-plugin-pointlabels")
 const toolTips = require("chartist-plugin-tooltips-updated")
+const fillDonut = require("chartist-plugin-fill-donut")
+const legend = require('chartist-plugin-legend')
 
 
 
@@ -22,40 +26,54 @@ interface AppProps {
 
 type Props = AppProps & LinkDispatchProps & LinkStateProps
 
-export function LineChart(props: Props) {
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 3,
+  },
+});
 
-  const lineChartOptions: ILineChartOptions = {
-    showLine: true,
-    fullWidth: true,
-    showPoint:true,
-    showArea:true,
-    low: 0,
-    chartPadding: {
-      right: 40
-    },
+export function GlobalData(props: Props) {
+
+  
+  const classes = useStyles()
+  
+  
+  var data12 = {
+    labels: [props.countries.globalData.TotalDeaths+ " Tote", props.countries.globalData.TotalRecovered+ " Geheilt",props.countries.globalData.TotalConfirmed-props.countries.globalData.TotalRecovered-props.countries.globalData.TotalDeaths + " Infiziert"],
+    series: [props.countries.globalData.TotalDeaths, props.countries.globalData.TotalRecovered, props.countries.globalData.TotalConfirmed-props.countries.globalData.TotalRecovered-props.countries.globalData.TotalDeaths]
+  };
+  
+  var options2:IPieChartOptions= {
+
+    height: 400,
+    width: 450,
+    donut: true,
+    donutWidth: 40,
+    donutSolid: false,
+    startAngle: 300,
+    showLabel: true,
+    labelOffset: 20,
+   
+    labelDirection: 'explode',
     plugins:[
-        pointLabels(),
-        toolTips({
-            appendToBody: true
-        })
+      Chartist.plugins.fillDonut({
+        items:[{
+          content:`<h3> Totale Anzahl Fälle: ${props.countries.globalData.TotalConfirmed}<h3>`
+        }]
+      }), 
     ]
   }
-
-  if (props.countries.chartData.length === 0) {
-    return <h1>Bitte Land auswählen</h1>
-  } else {
     return (
       <div>
-        {props.countries.chartData.map(element => 
-        <div>
-            <h1>{props.countries.currentCountry[props.countries.chartData.indexOf(element)]}</h1>
-            <ChartistGraph data={element} options={lineChartOptions} type={'Bar'} />
-        </div>)}
-      </div>
-    )
-  }
+        <Paper className={classes.root}>
+        <ChartistGraph data={data12} options={options2} type={'Pie'} />
+        </Paper>
+      </div>)
+      }
 
-}
+  
+  
+
 
 
 interface LinkStateProps {
@@ -75,5 +93,5 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>, ownPr
   startSettingCurrentCountry: bindActionCreators(startSettingCurrentCountry, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LineChart);
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalData);
 

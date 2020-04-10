@@ -17,6 +17,8 @@
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
     "chartist": "^0.11.4",
+    "chartist-plugin-fill-donut": "^0.1.4",
+    "chartist-plugin-legend": "^0.6.2",
     "chartist-plugin-pointlabels": "0.0.6",
     "chartist-plugin-tooltips-updated": "^0.1.2",
     "moment-timezone": "^0.5.28",

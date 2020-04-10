@@ -14,6 +14,7 @@ import {AppState} from '../store/configureStore'
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    margin: 30
   },
 });
 

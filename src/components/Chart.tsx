@@ -9,6 +9,9 @@ import { AppState } from '../store/configureStore'
 import ChartistGraph from 'react-chartist'
 import { ILineChartOptions } from 'chartist'
 import Chartist from 'chartist'
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import '../css/Tooltip.css'
 
 window["Chartist"] = Chartist;
 
@@ -22,7 +25,16 @@ interface AppProps {
 
 type Props = AppProps & LinkDispatchProps & LinkStateProps
 
+const useStyles = makeStyles({
+    root: {
+      flexGrow: 1,
+      margin: 30
+    },
+  });
+
 export function LineChart(props: Props) {
+
+  const classes = useStyles()
 
   const lineChartOptions: ILineChartOptions = {
     showLine: true,
@@ -34,9 +46,9 @@ export function LineChart(props: Props) {
       right: 40
     },
     plugins:[
-        pointLabels(),
-        toolTips({
-            appendToBody: true
+        Chartist.plugins.tooltip({
+            appendToBody: false,
+            className:'tooltip'
         })
     ]
   }
@@ -44,10 +56,13 @@ export function LineChart(props: Props) {
   if(props.users.chart==='linechart'){
     return (
       <div>
+        <div></div>
         {props.countries.chartData.map(element => 
         <div>
+            <Paper className={classes.root}>
             <h1>{props.countries.currentCountry[props.countries.chartData.indexOf(element)]}</h1>
             <ChartistGraph data={element} options={lineChartOptions} type={'Line'} />
+            </Paper>
         </div>)}
       </div>
     )
@@ -56,8 +71,10 @@ export function LineChart(props: Props) {
     <div>
       {props.countries.chartData.map(element => 
       <div>
+          <Paper className={classes.root}>
           <h1>{props.countries.currentCountry[props.countries.chartData.indexOf(element)]}</h1>
           <ChartistGraph data={element} options={lineChartOptions} type={'Bar'} />
+          </Paper>
       </div>)}
     </div>
   )}

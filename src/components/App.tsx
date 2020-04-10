@@ -12,6 +12,8 @@ import TabBar from './TabBar'
 import Chart from './Chart'
 import {Spinner} from './Spinner'
 import  RadioButtonsGroup  from './RadioButton';
+import GlobalDialog from './GlobalDialog'
+import '../css/App.css'
 
 
 interface AppProps {
@@ -50,7 +52,8 @@ export class App extends React.Component<Props>{
       tab = <EnhancedTable></EnhancedTable>
     }
     return (
-      <div>
+      <div className="App">
+        <GlobalDialog></GlobalDialog>
         <SimpleSelect></SimpleSelect>
         <TabBar></TabBar>
         {spinner}

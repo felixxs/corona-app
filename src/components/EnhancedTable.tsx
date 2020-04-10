@@ -56,7 +56,7 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
-  { id: 'Country', numeric: false, disablePadding: true, label: 'Land' },
+  { id: 'Country', numeric: false, disablePadding: false, label: 'Land' },
   { id: 'NewConfirmed', numeric: false, disablePadding: true, label: 'Anzahl neuer bestätigter Fälle' },
   { id: 'TotalConfirmed', numeric: true, disablePadding: false, label: 'Anzahl bestätigter Fälle' },
   { id: 'NewDeaths', numeric: true, disablePadding: false, label: 'Neue Todesfälle' },
@@ -112,10 +112,12 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
+      
     },
     paper: {
       width: '100%',
       marginBottom: theme.spacing(2),
+      marginTop: theme.spacing(2),
     },
     table: {
       minWidth: 750,
@@ -206,12 +208,12 @@ export function EnhancedTable(props:Props) {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.Country}
                       </TableCell>
-                      <TableCell align="right">{row.NewConfirmed}</TableCell>
-                      <TableCell align="right">{row.TotalConfirmed}</TableCell>
-                      <TableCell align="right">{row.NewDeaths}</TableCell>
-                      <TableCell align="right">{row.TotalDeaths}</TableCell>
-                      <TableCell align="right">{row.NewRecovered}</TableCell>
-                      <TableCell align="right">{row.TotalRecovered}</TableCell>
+                      <TableCell align="center">{row.NewConfirmed}</TableCell>
+                      <TableCell align="center">{row.TotalConfirmed}</TableCell>
+                      <TableCell align="center">{row.NewDeaths}</TableCell>
+                      <TableCell align="center">{row.TotalDeaths}</TableCell>
+                      <TableCell align="center">{row.NewRecovered}</TableCell>
+                      <TableCell align="center">{row.TotalRecovered}</TableCell>
                     </TableRow>
                   );
                 })}
