@@ -12,6 +12,7 @@ import Chartist from 'chartist'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import '../css/Tooltip.css'
+import { colors } from '@material-ui/core';
 
 window["Chartist"] = Chartist;
 
@@ -30,6 +31,15 @@ const useStyles = makeStyles({
       flexGrow: 1,
       margin: 30
     },
+    center: {
+        textAlign:'center',
+        paddingTop:10, 
+        marginTop: 30,
+        fontFamily: 'Roboto, sans-serif;',
+        color: '#9e9e9e',
+        fontSize: '14px',
+        fontStyle: 'normal'
+    }
   });
 
 export function LineChart(props: Props) {
@@ -60,8 +70,8 @@ export function LineChart(props: Props) {
         {props.countries.chartData.map(element => 
         <div>
             <Paper className={classes.root}>
-            <h1>{props.countries.currentCountry[props.countries.chartData.indexOf(element)]}</h1>
-            <ChartistGraph data={element} options={lineChartOptions} type={'Line'} />
+            <h1 className={classes.center}>{props.countries.currentCountry[props.countries.chartData.indexOf(element)]}</h1>
+            <ChartistGraph className={classes.center} data={element} options={lineChartOptions} type={'Line'} />
             </Paper>
         </div>)}
       </div>
@@ -72,8 +82,8 @@ export function LineChart(props: Props) {
       {props.countries.chartData.map(element => 
       <div>
           <Paper className={classes.root}>
-          <h1>{props.countries.currentCountry[props.countries.chartData.indexOf(element)]}</h1>
-          <ChartistGraph data={element} options={lineChartOptions} type={'Bar'} />
+          <h1 className={classes.center}>{props.countries.currentCountry[props.countries.chartData.indexOf(element)]}</h1>
+          <ChartistGraph  className={classes.center} data={element} options={lineChartOptions} type={'Bar'} />
           </Paper>
       </div>)}
     </div>

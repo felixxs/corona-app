@@ -10,6 +10,8 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AppActions } from '../types/actions';
 import { UserInteractionState } from "../types/Country";
 import { AppState } from '../store/configureStore'
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
 
 interface AppProps {
 
@@ -20,7 +22,23 @@ interface ComponentAppState {
 
 type Props = AppProps & LinkDispatchProps & LinkStateProps
 
+const useStyles = makeStyles({
+    root: {
+      flexGrow: 1,
+      textAlign:'center',
+      margin: 30
+    },
+    left:{
+        float:'left'
+    },
+    right:{
+        float:'right'
+    }
+  })
+
 export function RadioButtonsGroup(props:Props) {
+
+  const classes = useStyles()
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const targetValue = (event.target as HTMLInputElement).value
@@ -28,12 +46,14 @@ export function RadioButtonsGroup(props:Props) {
   };
 
   return (
+    <Paper className={classes.root}>
     <FormControl component="fieldset">
       <RadioGroup aria-label="gender" name="gender1" value={props.user.chart} onChange={handleChange}>
-        <FormControlLabel value="linechart" control={<Radio />} label="Line Chart" />
-        <FormControlLabel value="barchart" control={<Radio />} label="Bar Chart" />
+        <FormControlLabel className={classes.left} value="linechart" control={<Radio />} label="Line Chart" />
+        <FormControlLabel className={classes.right} value="barchart" control={<Radio />} label="Bar Chart" />
       </RadioGroup>
     </FormControl>
+    </Paper>
   );
 }
 
