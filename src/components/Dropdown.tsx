@@ -1,19 +1,26 @@
-import React from 'react';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import { startSettingCurrentCountry, fetchDayOneDataCountry} from '../actions/countries'
-import { ThunkDispatch } from 'redux-thunk';
-import { AppActions } from '../types/actions';
+import React from "react";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {
+  startSettingCurrentCountry,
+  fetchDayOneDataCountry,
+} from "../actions/countries";
+import { ThunkDispatch } from "redux-thunk";
+import { AppActions } from "../types/actions";
 import { CountryState } from "../types/Country";
-import {AppState} from '../store/configureStore'
-import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import Chip from '@material-ui/core/Chip';
-
+import { AppState } from "../store/configureStore";
+import {
+  createStyles,
+  makeStyles,
+  useTheme,
+  Theme,
+} from "@material-ui/core/styles";
+import Input from "@material-ui/core/Input";
+import Chip from "@material-ui/core/Chip";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,16 +30,17 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: 300,
     },
     chips: {
-      display: 'flex',
-      flexWrap: 'wrap',
+      display: "flex",
+      flexWrap: "wrap",
     },
     chip: {
       margin: 2,
+      color: "#474975",
     },
     noLabel: {
       marginTop: theme.spacing(3),
     },
-  }),
+  })
 );
 
 const ITEM_HEIGHT = 48;
@@ -46,26 +54,20 @@ const MenuProps = {
   },
 };
 
-interface AppProps{
+interface AppProps {}
+interface ComponentAppState {}
 
-}
-interface ComponentAppState{
+type Props = AppProps & LinkDispatchProps & LinkStateProps;
 
-}
-
-type Props = AppProps & LinkDispatchProps & LinkStateProps
-
-
-export function SimpleSelect(props:Props) {
-    
-    const classes = useStyles();
-    const theme = useTheme();
-    const [country, setCountry] = React.useState<string[]>([]);
+export function SimpleSelect(props: Props) {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [country, setCountry] = React.useState<string[]>([]);
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     const countries = event.target.value as string[];
     setCountry(countries);
-    props.startSettingCurrentCountry(countries)
+    props.startSettingCurrentCountry(countries);
     props.fetchDayOneDataCountry(countries);
   };
 
@@ -79,10 +81,13 @@ export function SimpleSelect(props:Props) {
   }
 
   return (
-    <div style={{textAlign:'center'}}>
-        <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-chip-label">Länder</InputLabel>
+    <div style={{ textAlign: "center" }}>
+      <FormControl style={{ color: "#FFFFFF" }} className={classes.formControl}>
+        <InputLabel style={{ color: "#FFFFFF" }} id="demo-mutiple-chip-label">
+          Countries
+        </InputLabel>
         <Select
+          style={{ color: "#FFFFFF" }}
           labelId="demo-mutiple-chip-label"
           id="demo-mutiple-chip"
           multiple
@@ -99,7 +104,11 @@ export function SimpleSelect(props:Props) {
           MenuProps={MenuProps}
         >
           {props.countries.countries.map((name) => (
-            <MenuItem key={name.Country} value={name.Country} style={getStyles(name.Country, country, theme)}>
+            <MenuItem
+              key={name.Country}
+              value={name.Country}
+              style={getStyles(name.Country, country, theme)}
+            >
               {name.Country}
             </MenuItem>
           ))}
@@ -109,26 +118,31 @@ export function SimpleSelect(props:Props) {
   );
 }
 
+interface LinkStateProps {
+  countries: CountryState;
+}
 
-interface LinkStateProps{
-    countries: CountryState
+interface LinkDispatchProps {
+  startSettingCurrentCountry: (name: string[]) => void;
+  fetchDayOneDataCountry: (countries?: string[]) => void;
 }
-  
-  
-interface LinkDispatchProps{
-    startSettingCurrentCountry: (name:string[]) => void
-    fetchDayOneDataCountry:(countries?: string[]) => void
-}
-  
-  
-  
-  const mapStateToProps = (state: AppState, ownProps: AppProps): LinkStateProps =>({
-    countries: state.countries
-  })
-  
-  const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions >, ownProps:AppProps):LinkDispatchProps => ({
-    startSettingCurrentCountry:bindActionCreators(startSettingCurrentCountry, dispatch),
-    fetchDayOneDataCountry:bindActionCreators(fetchDayOneDataCountry, dispatch)
-  })
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(SimpleSelect);
+
+const mapStateToProps = (
+  state: AppState,
+  ownProps: AppProps
+): LinkStateProps => ({
+  countries: state.countries,
+});
+
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<any, any, AppActions>,
+  ownProps: AppProps
+): LinkDispatchProps => ({
+  startSettingCurrentCountry: bindActionCreators(
+    startSettingCurrentCountry,
+    dispatch
+  ),
+  fetchDayOneDataCountry: bindActionCreators(fetchDayOneDataCountry, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SimpleSelect);

@@ -1,10 +1,10 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import GlobalData from './GlobalData'
+import React from "react";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import GlobalData from "./GlobalData";
 
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
@@ -18,8 +18,13 @@ export default function AlertDialog() {
   };
 
   return (
-    <div style={{paddingTop: 5, textAlign: 'center'}}>
-      <Button  variant="outlined" color="secondary" onClick={handleClickOpen}>
+    <div style={{ paddingTop: 5, textAlign: "center" }}>
+      <Button
+        style={{ borderColor: "#FFFFFF", color: "#FFFFFF" }}
+        variant="outlined"
+        color="secondary"
+        onClick={handleClickOpen}
+      >
         Show Global Data
       </Button>
       <Dialog
@@ -28,9 +33,14 @@ export default function AlertDialog() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle  id="alert-dialog-title">{"Corona Global Data"}</DialogTitle>
+        <DialogTitle
+          style={{ textAlign: "center", color: "#9e9e9e" }}
+          id="alert-dialog-title"
+        >
+          {"Corona Global Data"}
+        </DialogTitle>
         <DialogContent>
-            <GlobalData></GlobalData>
+          <GlobalData></GlobalData>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
