@@ -79,7 +79,7 @@ export function SimpleSelect(props:Props) {
   }
 
   return (
-    <div>
+    <div style={{textAlign:'center'}}>
         <FormControl className={classes.formControl}>
         <InputLabel id="demo-mutiple-chip-label">Länder</InputLabel>
         <Select

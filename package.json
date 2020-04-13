@@ -13,9 +13,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
-    "apexcharts": "^3.18.1",
     "axios": "^0.19.2",
-    "chart.js": "^2.9.3",
     "chartist": "^0.11.4",
     "chartist-plugin-fill-donut": "^0.1.4",
     "chartist-plugin-legend": "^0.6.2",
@@ -23,9 +21,7 @@
     "chartist-plugin-tooltips-updated": "^0.1.2",
     "moment-timezone": "^0.5.28",
     "react": "^16.13.1",
-    "react-apexcharts": "^1.3.7",
     "react-chartist": "^0.14.3",
-    "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
@@ -55,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-redux": "^7.1.7"
+    "@types/react-redux": "^7.1.7",
+    "prettier": "2.0.4"
   }
 }

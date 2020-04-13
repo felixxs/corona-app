@@ -111,7 +111,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: '100%',
+      margin: '30px',
       
     },
     paper: {
@@ -205,10 +205,10 @@ export function EnhancedTable(props:Props) {
                       tabIndex={-1}
                       key={row.Country}
                     >
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <TableCell component="th" id={labelId} scope="row" padding="default">
                         {row.Country}
                       </TableCell>
-                      <TableCell align="center">{row.NewConfirmed}</TableCell>
+                      <TableCell align="center" >{row.NewConfirmed}</TableCell>
                       <TableCell align="center">{row.TotalConfirmed}</TableCell>
                       <TableCell align="center">{row.NewDeaths}</TableCell>
                       <TableCell align="center">{row.TotalDeaths}</TableCell>

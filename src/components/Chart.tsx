@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { startSettingCurrentCountry } from '../actions/countries'
@@ -32,6 +32,7 @@ const useStyles = makeStyles({
       margin: 30
     },
     center: {
+
         textAlign:'center',
         paddingTop:10, 
         marginTop: 30,
@@ -49,7 +50,7 @@ export function LineChart(props: Props) {
   const lineChartOptions: ILineChartOptions = {
     showLine: true,
     fullWidth: true,
-    showPoint:true,
+    showPoint:false,
     showArea:true,
     low: 0,
     chartPadding: {
@@ -66,7 +67,7 @@ export function LineChart(props: Props) {
   if(props.users.chart==='linechart'){
     return (
       <div>
-        <div></div>
+        <Fragment></Fragment>
         {props.countries.chartData.map(element => 
         <div>
             <Paper className={classes.root}>

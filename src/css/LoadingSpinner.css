@@ -1,0 +1,33 @@
+.st3{fill:none}
+.st1{fill:none;stroke:#FFFFFF;stroke-width:3;stroke-miterlimit:10;}
+.st2{fill:#FFFFFF}
+
+path{
+    stroke: #FFFFFF;
+    fill:#FFFFFF;
+    stroke-dasharray: 1800;
+    opacity:10;
+    animation: animate 3s cubic-bezier(0,0.23,1,.1);
+}
+
+@keyframes animate {
+    0%{
+        opacity: 0;
+        fill:none;
+        stroke-dashoffset: 1800;
+    }
+    30%{
+        opacity: 10;
+        fill:none;
+        stroke-dashoffset: 1800;
+    }
+    90%{
+        fill:rgba(255,255,255,0);
+    }
+    100%{
+        opacity: 10;
+        fill:rgba(255,255,255,1);
+        stroke-dashoffset: 0;
+    }
+
+}

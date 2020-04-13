@@ -18,8 +18,8 @@ export default function AlertDialog() {
   };
 
   return (
-    <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+    <div style={{paddingTop: 5, textAlign: 'center'}}>
+      <Button  variant="outlined" color="secondary" onClick={handleClickOpen}>
         Show Global Data
       </Button>
       <Dialog

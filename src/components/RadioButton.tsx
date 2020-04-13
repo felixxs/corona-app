@@ -12,6 +12,7 @@ import { UserInteractionState } from "../types/Country";
 import { AppState } from '../store/configureStore'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
+import { Grid } from '@material-ui/core';
 
 interface AppProps {
 
@@ -28,12 +29,6 @@ const useStyles = makeStyles({
       textAlign:'center',
       margin: 30
     },
-    left:{
-        float:'left'
-    },
-    right:{
-        float:'right'
-    }
   })
 
 export function RadioButtonsGroup(props:Props) {
@@ -49,8 +44,8 @@ export function RadioButtonsGroup(props:Props) {
     <Paper className={classes.root}>
     <FormControl component="fieldset">
       <RadioGroup aria-label="gender" name="gender1" value={props.user.chart} onChange={handleChange}>
-        <FormControlLabel className={classes.left} value="linechart" control={<Radio />} label="Line Chart" />
-        <FormControlLabel className={classes.right} value="barchart" control={<Radio />} label="Bar Chart" />
+        <FormControlLabel  value="linechart" control={<Radio />} label="Line Chart" />
+        <FormControlLabel  value="barchart" control={<Radio />} label="Bar Chart" />
       </RadioGroup>
     </FormControl>
     </Paper>

@@ -76,7 +76,6 @@ export function fetchCoronaData(url:string) {
     return (dispatch: Dispatch<AppActions>, getState:()=> AppState) => {
 
         dispatch(fetchDataPending())
-        console.log(getState().countries.pending)
         fetch(url)
             .then((response) => {
                 if (!response.ok) {
@@ -98,7 +97,6 @@ export function fetchCoronaData(url:string) {
                     }                     
                 }
                 dispatch(getCountries(countryArray))
-                console.log(getState().countries.pending)
             })
             .catch(() => console.log("Error fetching data"));
     };
