@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/Spinner.css";
-import VirusLoading from "./VirusLoading";
+import SpinnerIcon from "./SpinnerIcon";
 
 export const Spinner = () => {
   const styled: React.CSSProperties = {
@@ -12,7 +12,7 @@ export const Spinner = () => {
 
   return (
     <div className="Spinner" style={styled}>
-      <VirusLoading></VirusLoading>
+      <SpinnerIcon></SpinnerIcon>
     </div>
   );
 };

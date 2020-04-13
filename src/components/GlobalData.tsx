@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 export function GlobalData(props: Props) {
   const classes = useStyles();
 
-  var data12 = {
+  var data = {
     labels: [
       props.countries.globalData.TotalDeaths + " Dead",
       props.countries.globalData.TotalRecovered + " Recovered",
@@ -46,16 +46,18 @@ export function GlobalData(props: Props) {
     ],
   };
 
-  var options2: IPieChartOptions = {
+  var options: IPieChartOptions = {
     height: 400,
     width: 450,
     donut: true,
     donutWidth: 40,
     donutSolid: false,
-    startAngle: 300,
+    startAngle: 320,
     showLabel: true,
-    labelOffset: 20,
+    labelOffset: 30,
     labelDirection: "explode",
+    labelPosition: "inside",
+    chartPadding: 10,
     plugins: [
       Chartist.plugins.fillDonut({
         items: [
@@ -78,8 +80,8 @@ export function GlobalData(props: Props) {
           fontSize: "14px",
           fontStyle: "normal",
         }}
-        data={data12}
-        options={options2}
+        data={data}
+        options={options}
         type={"Pie"}
       />
     </div>

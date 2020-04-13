@@ -11,7 +11,6 @@ import { ILineChartOptions } from "chartist";
 import Chartist from "chartist";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import "../css/Tooltip.css";
 
 window["Chartist"] = Chartist;
 

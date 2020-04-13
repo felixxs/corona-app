@@ -22,10 +22,13 @@ You will also see any lint errors in the console.
 
 ## Challenges
 
+- Functionality of Redux
+- Finding suitable Library for Charts in combination with Typescript
+
 ## Extra Features
 
 - Multiselect Countries for comparison
-- Custom "Stay at Home" - Loading Spinner
+- Loading Spinner
 - Dialog Window with Global Corona Data
 - Ability to switch between Line and Bar Chart
 - User can select a maximum amount of rows he wants to see and can then paginate in the Table

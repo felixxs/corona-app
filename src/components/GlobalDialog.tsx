@@ -5,6 +5,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import GlobalData from "./GlobalData";
+import PublicIcon from "@material-ui/icons/Public";
 
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
@@ -20,6 +21,7 @@ export default function AlertDialog() {
   return (
     <div style={{ paddingTop: 5, textAlign: "center" }}>
       <Button
+        startIcon={<PublicIcon></PublicIcon>}
         style={{ borderColor: "#FFFFFF", color: "#FFFFFF" }}
         variant="outlined"
         color="secondary"

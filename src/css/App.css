@@ -1,8 +1,9 @@
 .App {
   flex-direction: column;
   background: linear-gradient(30deg, #212332 0%, #474975 70%);
+  flex: 1;
   height: 100vh;
   background-repeat: repeat;
   background-attachment: fixed;
-  background-size: contain;
+  background-size: cover;
 }

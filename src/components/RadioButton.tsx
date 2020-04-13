@@ -45,12 +45,12 @@ export function RadioButtonsGroup(props: Props) {
         >
           <FormControlLabel
             value="linechart"
-            control={<Radio />}
+            control={<Radio style={{ color: "#474975" }} />}
             label="Line Chart"
           />
           <FormControlLabel
             value="barchart"
-            control={<Radio />}
+            control={<Radio style={{ color: "#474975" }} />}
             label="Bar Chart"
           />
         </RadioGroup>
