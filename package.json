@@ -19,7 +19,7 @@
     "chartist-plugin-legend": "^0.6.2",
     "chartist-plugin-pointlabels": "0.0.6",
     "chartist-plugin-tooltips-updated": "^0.1.2",
-    "moment-timezone": "^0.5.28",
+    "moment-timezone": "^0.5.35",
     "react": "^16.13.1",
     "react-chartist": "^0.14.3",
     "react-dom": "^16.13.1",
